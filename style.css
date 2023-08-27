@@ -5,19 +5,20 @@
     --font-sizing: 16px;
     --deal-slide-height: 3.5rem;
     --nav-bar-height: calc(var(--deal-slide-height) * 1.5);
+    --testimonial-height: 460px;
 
     /* Color Variables */
     --deal-slide-color: rgb(77, 77, 77);
     --nav-bar-color: #EEE0C9;
     --nav-bar-hover: hsl(37, 52%, 90%);
     --base-color: #F1F0E8;
-    --text-color: rgba(100, 100, 100);
+    --text-color: rgb(100, 100, 100);
 }
 
 body {
     font-size: var(--font-sizing);
     background-color: var(--base-color);
-    height: 400vh;
+    overflow-x: hidden;
 }
 
 h1,
@@ -42,7 +43,7 @@ h6 {
 }
 
 .main-header {
-    height: auto;
+    height: var(--nav-bar-height);
     position: sticky;
     top: 0;
     background-color: var(--nav-bar-color);
@@ -179,6 +180,7 @@ button.nav-item::after {
 .main-content {
     max-width: 1200px;
     margin: auto;
+    height: 100%;
 }
 
 .hero-shot {
@@ -238,19 +240,31 @@ a.cta-button:hover {
     color: black;
 }
 
+.cta-button.book-now {
+    margin-top: 30px;
+    width: 50%;
+    font-size: 1rem;
+}
+
 a.primary-button {
     text-decoration: none;
     background-color: #96B6C5;
-    color: var(--text-color);
+    color: white;
     padding: 20px;
-    margin-top: 20px;
     display: flex;
     justify-content: center;
-    font-size: 1.5rem;
+    font-size: 1rem;
+    margin: 20px 0;
+    transition: background-color 300ms ease-in-out;
+    border-radius: 10px;
 }
 
 a.primary-button:hover {
     background-color: #ADC4CE;
+}
+
+a.primary-button:focus {
+    outline: 2px solid #ADC4CE;
 }
 
 .booking-information {
@@ -265,7 +279,7 @@ a.primary-button:hover {
     height: calc(var(--nav-bar-height));
     padding: 17px;
     background-color: var(--nav-bar-color);
-    position: relative;
+    position: absolute;
     top: -90px;
 }
 
@@ -429,43 +443,277 @@ a.primary-button:hover {
     padding-left: 10px;
 } 
 
-.amenities-section {
-    position: relative;
-    top: -90px;
-}
-
 .amenities-container {
     display: flex;
-    padding: 40px;
+    padding: 40px 0;
     gap: 25px;
 }
 
 .pool-image {
     background-image: url("https://images.pexels.com/photos/189296/pexels-photo-189296.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2");
-    background-size: cover;
-    background-position: center;
-    width: 100%;
-    height: 100%;
 }
 
 .food-image {
     background-image: url("https://images.pexels.com/photos/1267320/pexels-photo-1267320.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2");
-    background-size: cover;
-    background-position: center;
-    width: 100%;
-    height: 100%;
 }
 
 .bar-image {
     background-image: url("https://images.pexels.com/photos/17993295/pexels-photo-17993295/free-photo-of-barman-preparing-drink.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2");
+}
+
+.amenities-section {
+    width: 100%;
+}
+
+.amenity-image {
     background-size: cover;
     background-position: center;
+    height: 50vh;
     width: 100%;
-    height: 100%;
+    border-radius: 10px;
 }
 
 .amenity-card {
     width: 33%;
+    border: 1px solid;
+    padding: 5px;
+    border-radius: 10px;
+    box-shadow: 0 0 8px 2px rgba(0, 0, 0, 0.25);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.subtitle {
+    margin: 0.75rem 0;
+}
+
+.content-text {
+    text-align: justify;
+    margin-bottom: 0.75rem 0;
+}
+
+.testimonial-section {
+    width: 100%;
+    background-color: rgba(173, 196, 206, 0.2);
+}
+
+.subtitle.testimonial-title {
+    text-align: center;
+    padding-top: 40px;
+}
+
+.testimonial-container {
+    display: flex;
+    gap: 40px;
+    padding: 40px;
+    text-align: center;
+    justify-content: center;
+}
+
+.testimony-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.testimony-image {
+    width: 25vw;
+    height: 25vw;
+    background-position: center;
+    background-size: cover;
+    border-radius: 100vw;
+    box-shadow: inset 0 0 10px 4px rgba(0, 0, 0, 0.4);
+    margin-bottom: 5px;
+}
+
+.subsubtitle.testimony-name {
+    margin-bottom: 10px;
+}
+
+.testimony-star-container {
+    display: flex;
+    gap: 2px;
+    margin-bottom: 10px;
+}
+
+.testimony-star {
+    background-image: url("./imgs/star-fill.svg");
+    background-position: center;
+    background-size: cover;
+    width: 25px;
+    height: 25px;
+}
+
+.testimony-1 {
+    background-image: url("./imgs/Jane-testimony.png");
+}
+
+.testimony-2 {
+    background-image: url("./imgs/James-Smith-testimony.png");
+}
+
+.testimony-3 {
+    background-image: url("./imgs/Jacky-tesimony.png");
+}
+
+
+.content-text.testimony-text {
+    max-width: 600px;
+}
+
+.cta-container {
+    border: 1px solid;
+    margin: 52px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 95%;
+    border-radius: 25px;
+}
+
+.cta-image {
+    border-radius: 25px 0 0 25px;
+    width: 50%;
+    height: 70vh;
+    background-image: url("./imgs/Hotel-Room.jpg");
+    background-size: cover;
+    background-position: center;
+}
+
+.cta-content-wrapper {
+    width: 50%;
+    padding: 52px 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.main-footer {
+    height: var(--nav-bar-height);
+    background-color: var(--nav-bar-color);
+    display: flex;
+    align-items: stretch;
+    justify-content: space-between;
+}
+
+.nav-links.footer {
+    height: 100%;
+}
+
+.left-side-footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    gap: 40px;
+    padding-left: 20px;
+}
+
+.footer-icon {
+    background-size: cover;
+    background-position: center;
+    height: 52px;
+    width: 52px;
+    cursor: pointer;
+}
+
+.footer-icon:hover { 
+    color: var(--text-color);
+    fill: var(--text-color);
+}
+
+.facebook-icon {
+    background-image: url("./imgs/facebook\ black.svg");
+}
+
+.facebook-icon:hover {
+    background-image: url("./imgs/facebook\ white.svg");
+}
+
+.twitter-icon {
+    background-image: url("./imgs/twitter\ black.svg");
+}
+
+.twitter-icon:hover {
+    background-image: url("./imgs/twitter\ white.svg");
+}
+
+.blog-icon {
+    width: auto;
+    height: auto;
+    font-size: 1.75rem;
+    font-weight: 900;
+    letter-spacing: 2px;
+}
+
+a.footer-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.copyright-footer {
+    background-color: var(--nav-bar-color);
+}
+
+.copyright-wrapper::after {
+    content: "";
+    width: 100%;
+    height: 1px;
+    background-color: rgba(0, 0, 0, 0.25);
+    position: absolute;
+    top: 0;
+    
+}
+
+.copyright-wrapper {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    padding: 5px;
+}
+
+@media (orientation: portrait) and (max-width: 768px) {
+    .testimony-image {
+        width: 25vh;
+        height: 25vh;
+    }
+}
+
+@media (min-width: 1200px) {
+    .testimony-image {
+        width: 300px;
+        height: 300px;
+    }
+}
+
+@media (max-width: 1000px) {
+    .testimonial-container {
+        flex-direction: column;
+    }
+
+    .cta-container {
+        flex-direction: column;
+    }
+
+    .cta-image {
+        border-radius: 25px 25px 0 0;
+        width: 100%;
+        height: 50vh;
+    }
+
+    .cta-content-wrapper {
+        width: 80%;
+        padding: 0;
+        padding-bottom: 40px;
+    }
+}
+
+
+@media (max-width: 1250px) {
+    .amenities-container {
+        padding: 40px 20px;
+    }
 }
 
 @media (max-width: 930px) {
@@ -480,14 +728,13 @@ a.primary-button:hover {
     .top-screen {
         box-shadow: 0px 1px 0px 1px rgba(0, 0, 0, 0.25);
     }   
+
+    .amenities-section {
+        margin-top: 90px;
+    }
 }
 
 @media (max-width: 900px) {
-
-    .hero-shot { 
-        height: calc(100vh - var(--nav-bar-height) - var(--deal-slide-height) + 100px);
-    }
-
     .nav-links {
         display: none;
     }
@@ -498,10 +745,46 @@ a.primary-button:hover {
     .right-side-container {
         margin-right: calc((var(--nav-bar-height) / 2) - 15px)
     }
+
+}
+
+@media (max-width: 768px) {
+    .amenity-image {
+        height: 40vh;
+    }
+    .amenities-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .amenity-card {
+        width: 60%;
+    }
 }
 
 @media (max-width: 565px) {
+    .amenity-card {
+        border: none;
+        box-shadow: none;
+    }
+    .amenities-container {
+        padding: 40px 0;
+    }
     .booking-information {
         display: none;
+    }
+    .amenities-section {   
+        margin-top: 0;
+    }
+    .amenity-card {
+        width: 100%;
+        /* height: 100vh; */
+    }
+}
+
+@media (max-width: 375px) {
+    .cta-button.book-now {
+        width: 80%;
     }
 }
