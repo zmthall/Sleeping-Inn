@@ -671,6 +671,7 @@ a.footer-link {
     justify-content: center;
     position: relative;
     padding: 5px;
+    text-align: center;
 }
 
 @media (orientation: portrait) and (max-width: 768px) {
@@ -735,7 +736,7 @@ a.footer-link {
 }
 
 @media (max-width: 900px) {
-    .nav-links {
+    .nav-links:not(.footer) {
         display: none;
     }
 
@@ -783,7 +784,13 @@ a.footer-link {
     }
 }
 
-@media (max-width: 375px) {
+@media (max-width: 600px) {
+    .nav-links.footer {
+        display: none;
+    }
+}
+
+@media (max-width: 426px) {
     .cta-button.book-now {
         width: 80%;
     }
