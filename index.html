@@ -18,7 +18,7 @@
             </div>
         </div>
     </header>
-    <header class="main-header data-sticky">
+    <header class="main-header">
         <nav class="nav-bar main-content">
             <div class="left-side-container">
                 <a class="home-logo-link" href="#">
@@ -39,10 +39,24 @@
             </div>
             <div class="right-side-container">
                 <ul class="nav-links">
-                    <li><button class="nav-item">Languages</button></li>
+                    <li class="language-button"><button class="nav-item" data-button="languages">Languages</button></li>
+                    <div class="languages-dropdown-container">
+                        <ul class="language-links">
+                            <li class="language-item"><a class="language-link" href="#">English - US</a></li>
+                            <li class="language-item"><a class="language-link" href="#">English - Asia Pacific</a></li>
+                            <li class="language-item"><a class="language-link" href="#">English - CA</a></li>
+                            <li class="language-item"><a class="language-link" href="#">English - UK</a></li>
+                            <li class="language-item"><a class="language-link" href="#">Español</a></li>
+                            <li class="language-item"><a class="language-link" href="#">Français</a></li>
+                            <li class="language-item"><a class="language-link" href="#">Deutsch</a></li>
+                            <li class="language-item"><a class="language-link" href="#">Português</a></li>
+                            <li class="language-item"><a class="language-link" href="#">Türkçe</a></li>
+                            <li class="language-item"><a class="language-link" href="#">Ελληνική</a></li>
+                        </ul>
+                    </div>
                     <li class="nav-item"><a href="#">My Account</a></li>
                 </ul>
-                <button class="nav-bar-mobile-icon mobile-content" type="button">
+                <button class="nav-bar-mobile-icon mobile-content" type="button" data-button="mobile-nav">
                     <div class="button-content">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
                             <path fill-rule="evenodd"
@@ -64,7 +78,7 @@
             </div>
         </div>
     </div>
-    <article class="booking-information main-content" data-test>
+    <article class="booking-information main-content" data-sticky>
         <div class="booking-input-container">
             <form class="booking-input-form" action="#">
                 <div class="top-booking-input">
@@ -79,8 +93,8 @@
 
                 <div class="bottom-booking-input">
                     <div class="booking-input-search-btns">
-                        <button type="button">1 Room, 2 Guests</button>
-                        <button type="button">Special Rates</button>
+                        <button type="button" data-button="guest-selection">1 Room, 2 Guests</button>
+                        <button type="button" data-button="special-rates">Special Rates</button>
                         <button type="submit">SEARCH</button>
                     </div>
                 </div>
