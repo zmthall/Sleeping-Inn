@@ -335,7 +335,7 @@ button.mobile-content-button.active::after {
 }
 
 .mobile-content-links:has(.mobile-content-button.active) .mobile-languages-container {
-    max-height: 20vh;
+    max-height: 125px;
     overflow-y: scroll;
 }
 

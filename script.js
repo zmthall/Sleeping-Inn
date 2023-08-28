@@ -35,6 +35,11 @@ buttons.forEach(button => {
 
 // listening when the window is being resized to reset .active class when the screen shrinks to a smaller screen
 window.addEventListener("resize", () => {
+    clearActiveClass();
+})
+
+
+function clearActiveClass() {
     let temp = document.querySelectorAll(".active");
     let width = screen.width;
     if(width <= 960) {
@@ -42,16 +47,18 @@ window.addEventListener("resize", () => {
             item.classList.remove("active");
         })
     }
-})
+}
 
 // Intersection observer for when the booking information container intersects with the header
 const topOptions = {
     root: null,
     threshold: 1,
-    rootMargin: "-84px 0px 0px 0px"
+    rootMargin: "-30px 0px 0px 0px"
 };
 const topObserver = new IntersectionObserver(entries => {
     const temp = document.querySelector(".languages-dropdown-container");
+    const temp2 = document.querySelector(".mobile-content-nav-container");
+
     entries.forEach(entry => {
         if(!entry.isIntersecting) {
             entry.target.classList.remove("near-top");
@@ -59,7 +66,8 @@ const topObserver = new IntersectionObserver(entries => {
                 entry.target.classList.add("top-screen");
                 temp.classList.add("hidden");
                 temp.previousElementSibling.classList.add("hidden");
-                temp.previousElementSibling.firstElementChild.classList.remove("active");
+                temp2.classList.add("hidden");
+                clearActiveClass();
             }
         } else {
             entry.target.classList.remove("top-screen");
@@ -67,6 +75,7 @@ const topObserver = new IntersectionObserver(entries => {
                 entry.target.classList.add("near-top");
                 temp.classList.remove("hidden");
                 temp.previousElementSibling.classList.remove("hidden");
+                temp2.classList.remove("hidden");
             }
         }
     })
@@ -76,11 +85,12 @@ const topObserver = new IntersectionObserver(entries => {
 const options = {
     root: null,
     threshold: 1,
-    rootMargin: "-300px 0px 0px 0px"
+    rootMargin: "-525px 0px 0px 0px"
 };
 const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
-        if(entry.boundingClientRect.y < 350) {
+        console.log(entry.target);
+        if(entry.boundingClientRect.y < 575) {
             if(entry.isIntersecting) {
                 entry.target.classList.remove("near-top");
             }
