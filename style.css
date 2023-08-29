@@ -225,12 +225,12 @@ button.nav-item {
 }
 
 button.nav-item::after {
-    content: "\25be";
+    content: "\25bc";
     font-size: 1.5rem;
 }
 
 button.nav-item.active::after {
-    content: "\25b4"
+    content: "\25b2"
 }
 
 .button-content {
@@ -306,12 +306,12 @@ button.nav-item.active::after {
 }
 
 button.mobile-content-button::after {
-    content: "\25be";
+    content: "\25bc";
     font-size: 1.5rem;
 }
 
 button.mobile-content-button.active::after {
-    content: "\25b4";
+    content: "\25b2";
 }
 
 .mobile-languages-container {
