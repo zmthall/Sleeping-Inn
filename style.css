@@ -226,7 +226,7 @@ button.nav-item {
 
 button.nav-item::after {
     content: "\25bc";
-    font-size: 1rem;
+    font-size: 0.1rem;
 }
 
 button.nav-item.active::after {
@@ -307,7 +307,7 @@ button.nav-item.active::after {
 
 button.mobile-content-button::after {
     content: "\25bc";
-    font-size: 1rem;
+    font-size: 0.1rem;
 }
 
 button.mobile-content-button.active::after {
