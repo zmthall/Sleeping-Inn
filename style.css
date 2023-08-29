@@ -225,8 +225,11 @@ button.nav-item {
 }
 
 button.nav-item::after {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     content: "\25bc";
-    font-size: 0.75rem;
+    font-size: 0.8rem;
 }
 
 button.nav-item.active::after {
@@ -307,7 +310,7 @@ button.nav-item.active::after {
 
 button.mobile-content-button::after {
     content: "\25bc";
-    font-size: 0.75rem;
+    font-size: 0.8rem;
 }
 
 button.mobile-content-button.active::after {
