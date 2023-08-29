@@ -225,9 +225,8 @@ button.nav-item {
 }
 
 button.nav-item::after {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    padding-top: 3px;
+    padding-left: 3px;
     content: "\25bc";
     font-size: 0.8rem;
 }
@@ -309,8 +308,10 @@ button.nav-item.active::after {
 }
 
 button.mobile-content-button::after {
+    margin-bottom: 5px;
+    padding-left: 5px;
     content: "\25bc";
-    font-size: 0.8rem;
+    font-size: 1rem;
 }
 
 button.mobile-content-button.active::after {
@@ -438,15 +439,15 @@ a.primary-button:focus-visible {
 
 .booking-information {
     position: sticky;
-    z-index: 3;
+    z-index: 0;
     /* top: 90px; */
     height: var(--nav-bar-height);
     translate: 0 -90px;
     top: 90px;
 }
 
-.booking-information.near-top {
-    z-index: 0;
+.booking-information.top-screen {
+    z-index: 2;
 }
 
 .booking-input-container {
@@ -576,9 +577,22 @@ a.primary-button:focus-visible {
     outline: 2px solid #ADC4CE;
 }
 
+.guest-selection-form-container {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    translate: 3% -60%;
+    width: 200px;
+}
+
+.guest-selection {
+    display: flex;
+}
+
 .booking-input-search-btns {
     display: flex;
     width: 100%;
+    padding: 20% 0;
 }
 
 .booking-input-search-btns button {

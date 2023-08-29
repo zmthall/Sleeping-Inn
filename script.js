@@ -1,6 +1,8 @@
 const stickyItem = document.querySelector("[data-sticky]");
 const buttons = document.querySelectorAll("[data-button]");
 var topScreen = false;
+var width = screen.width;
+var height = screen.height;
 
 // listening for clicks within the entire window to close containers that open from using .active class
 window.addEventListener("click", (e) => {
@@ -35,18 +37,17 @@ buttons.forEach(button => {
 
 // listening when the window is being resized to reset .active class when the screen shrinks to a smaller screen
 window.addEventListener("resize", () => {
+    width = screen.width;
+    height = screen.height;
     clearActiveClass();
 })
 
 
 function clearActiveClass() {
     let temp = document.querySelectorAll(".active");
-    let width = screen.width;
-    if(width <= 960) {
-        temp.forEach(item => {
-            item.classList.remove("active");
-        })
-    }
+    temp.forEach(item => {
+        item.classList.remove("active");
+    })
 }
 
 // Intersection observer for when the booking information container intersects with the header
@@ -61,7 +62,6 @@ const topObserver = new IntersectionObserver(entries => {
 
     entries.forEach(entry => {
         if(!entry.isIntersecting) {
-            entry.target.classList.remove("near-top");
             if(entry.intersectionRect.y < 150 && entry.intersectionRect.y != 0) {
                 entry.target.classList.add("top-screen");
                 temp.classList.add("hidden");
@@ -72,7 +72,6 @@ const topObserver = new IntersectionObserver(entries => {
         } else {
             entry.target.classList.remove("top-screen");
             if(entry.intersectionRect.y < 150 && entry.intersectionRect.y != 0) {
-                entry.target.classList.add("near-top");
                 temp.classList.remove("hidden");
                 temp.previousElementSibling.classList.remove("hidden");
                 temp2.classList.remove("hidden");
@@ -81,25 +80,4 @@ const topObserver = new IntersectionObserver(entries => {
     })
 }, topOptions)
 
-// Intersection observer for when the booking information container gets close to the header language dropdown nav element
-const options = {
-    root: null,
-    threshold: 1,
-    rootMargin: "-525px 0px 0px 0px"
-};
-const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-        console.log(entry.target);
-        if(entry.boundingClientRect.y < 575) {
-            if(entry.isIntersecting) {
-                entry.target.classList.remove("near-top");
-            }
-            else {
-                entry.target.classList.add("near-top");
-            }
-        }
-    })
-}, options)
-
-observer.observe(stickyItem);
 topObserver.observe(stickyItem);
