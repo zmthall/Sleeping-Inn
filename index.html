@@ -118,26 +118,37 @@
                         <div class="guest-selection-container">
                             <button class="booking-btn contained" type="button" data-button="guest-selection">1 Room, 2 Guests</button>
                             <div class="guest-selection-form-container">
-                                    <div class="guest-selection room-count-container">
-                                        <button class="selection-btn" type="button" data-button="minus-room">-</button>
-                                        <div class="room-count selection-count">1</div>
-                                        <button class="selection-btn" type="button" data-button="add-room">+</button>
+                                <div class="guest-selection room-count-container">
+                                    <h3 class="guest-selection-title rooms-title">Rooms</h3>
+                                    <div class="selection-wrapper">
+                                        <button class="selection-btn minus fade" type="button" data-selection-btn="room">-</button>
+                                        <div class="room-count selection-count" data-room>1</div>
+                                        <button class="selection-btn add" type="button" data-selection-btn="room">+</button>
                                     </div>
-    
-                                    <div class="guest-selection adult-count-container">
-                                        <button class="selection-btn" type="button" data-button="minus-adult">-</button>
-                                        <div class="adult-count selection-count">1</div>
-                                        <button class="selection-btn" type="button" data-button="add-adult">+</button>
+                                </div>
+
+                                <div class="guest-selection adult-count-container">
+                                    <h3 class="guest-selection-title adult-title">Adults</h3>
+                                    <div class="selection-wrapper">
+                                        <button class="selection-btn minus fade" type="button" data-selection-btn="adult">-</button>
+                                        <div class="adult-count selection-count" data-adult>1</div>
+                                        <button class="selection-btn add" type="button" data-selection-btn="adult">+</button>
                                     </div>
-    
-                                    <div class="guest-selection adult-count-container">
-                                        <button class="selection-btn" type="button" data-button="minus-kid">-</button>
-                                        <div class="children-count selection-count">1</div>
-                                        <button class="selection-btn" type="button" data-button="add-kid">+</button>
+                                </div>
+
+                                <div class="guest-selection adult-count-container">
+                                    <h3 class="guest-selection-title kid-title">Kids</h3>
+                                    <div class="selection-wrapper">
+                                        <button class="selection-btn minus fade" type="button" data-selection-btn="child">-</button>
+                                        <div class="children-count selection-count" data-child>1</div>
+                                        <button class="selection-btn add" type="button" data-selection-btn="child">+</button>
                                     </div>
+                                </div>
                             </div>
                         </div>
-                        <button class="booking-btn" type="button" data-button="special-rates">Special Rates</button>
+                        <div class="special-rates-selection-container">
+                            <button class="booking-btn contained" type="button" data-button="special-rates">Special Rates</button>
+                        </div>
                         <button class="booking-btn" type="submit">SEARCH</button>
                     </div>
                 </div>

@@ -1,14 +1,20 @@
 const stickyItem = document.querySelector("[data-sticky]");
 const buttons = document.querySelectorAll("[data-button]");
+const selectionButtons = document.querySelectorAll("[data-selection-btn]");
 var topScreen = false;
 var width = screen.width;
 var height = screen.height;
+var selectionCounts = [1, 1, 1];
+
+addSubtractSelections();
 
 // listening for clicks within the entire window to close containers that open from using .active class
 window.addEventListener("click", (e) => {
     const languageDropdown = document.querySelector(".languages-dropdown-container");
     const mobileLanguage = document.querySelector(".mobile-languages-container"); 
     const mobileNav = document.querySelector(".mobile-content-nav-container");
+    const guestSelection = document.querySelector(".guest-selection-form-container");
+
     buttons.forEach(button => {
         if(button != e.target && button.classList.contains("active")) {
             if(languageDropdown.contains(e.target) 
@@ -20,8 +26,10 @@ window.addEventListener("click", (e) => {
             } else if(mobileLanguage.contains(e.target)
                 && button.getAttribute("data-button") === "mobile-languages") {
                 return;
-            }
-            else {
+            } else if(guestSelection.contains(e.target)
+                && button.getAttribute("data-button") === "guest-selection") {
+                return;
+            } else {
                 button.classList.toggle("active");
             }
         }
@@ -81,3 +89,35 @@ const topObserver = new IntersectionObserver(entries => {
 }, topOptions)
 
 topObserver.observe(stickyItem);
+
+// functions used to determine counts for the children and other buttons
+
+function addSubtractSelections() {
+    let roomCount = document.querySelector("[data-room]");
+    let adultCount = document.querySelector("[data-adult]");
+    let childCount = document.querySelector("[data-child]");
+    selectionButtons.forEach(button => {
+        button.addEventListener("click", () => {
+            if(button.getAttribute("data-selection-btn") === "room") {
+                if(button.classList.contains("add") && selectionCounts[0] < 9) {
+                    roomCount.innerHTML = ++selectionCounts[0];
+                } else if(button.classList.contains("minus") && selectionCounts[0] > 1) {
+                    roomCount.innerHTML = --selectionCounts[0];
+                }
+
+                if(selectionCounts[0] === 9 || selectionCounts[0] === 1) {
+                    button.classList.add("fade");
+                } else {
+                    button.classList.remove("fade");
+                }
+            } else if(button.getAttribute("data-selection-btn") === "adult") {
+                console.log("Clicking Adult");
+            } else if(button.getAttribute("data-selection-btn") === "child") {
+                console.log("Clicking Child");
+            } else {
+                return -1;
+            }
+        })
+    })
+
+}

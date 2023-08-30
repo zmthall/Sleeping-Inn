@@ -472,9 +472,8 @@ a.primary-button:focus-visible {
 .booking-input-form {
     height: 100%;
     display: flex;
-    align-items: stretch;
+    justify-content: space-between;
     gap: 20px;
-    display: flex;
 }
 
 .booking-input-form * {
@@ -489,14 +488,14 @@ a.primary-button:focus-visible {
     border: none;
     gap: 20px;
     width: 100%;
-    height: 100%;
     align-items: stretch;
 }
 
 .bottom-booking-input {
     display: flex;
+    margin: 0 auto;
     border: none;
-    width: 100%;
+    width: 75%;
     height: 100%;
 }
 
@@ -575,7 +574,7 @@ a.primary-button:focus-visible {
     left: 0;
     height: 20px;
     width: 100%;
-    padding: 5px 5px;
+    padding: 0px 5px;
     font-size: 0.75rem;
     color: black;
     font-weight: bold;
@@ -599,15 +598,37 @@ a.primary-button:focus-visible {
     width: 100%;
 }
 
+.booking-btn.contained {
+    border-right: 1px solid var(--text-color);
+}
+
+.guest-selection-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
 .guest-selection-container,
+.special-rates-selection-container,
 .booking-btn {
-    width: 100%;
     border: none;
 }
 
 .booking-btn {
+    width: 20%;
+    height: 48px;
+}
+
+.guest-selection-container,
+.special-rates-selection-container {
+    width: 40%;
+    height: 400px;
+    background: none;
+}
+
+.booking-btn {
     cursor: pointer;
+    position: relative;
 }
 
 .booking-btn:hover {
@@ -615,24 +636,106 @@ a.primary-button:focus-visible {
 }
 
 .booking-btn:focus-visible {
-    outline: 2px solid #ADC4CE;
-}
-
-.booking-btn:first-child {
-    border-right: 1px solid rgba(0, 0, 0, 0.4);
-}
-
-.booking-btn:last-child {
-    border-left: 1px solid rgba(0, 0, 0, 0.4);
+    border: 1px solid #ADC4CE;
 }
 
 .booking-btn.contained {
     width: 100%;
-    height: 100%;
+}
+
+.booking-btn.contained::after {
+    padding-top: 3px;
+    padding-left: 3px;
+    content: "\25bc";
+    font-size: 0.8rem;
+}
+
+.booking-btn.contained.active::after {
+    content: "\25b2";
 }
 
 .guest-selection-form-container {
-    display: none;
+    background-color: var(--base-color);
+    border: none;
+    opacity: 0;
+    margin-top: 40px;
+    position: relative;
+    filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.25));
+    transition: opacity 500ms ease-in-out;
+    width: 150%;
+}
+
+.guest-selection-form-container::after {
+    content: "";
+    width: 0; 
+    height: 0; 
+    border-left: 25px solid transparent;
+    border-right: 25px solid transparent;
+    border-bottom: 25px solid var(--base-color);
+    position: absolute;
+    top: 0;
+    left: 50%;
+    translate: -50% -90%;
+    z-index: -1;
+}
+
+.guest-selection-form-container * {
+    background-color: var(--base-color);
+    border: none;
+}
+
+.booking-btn.contained.active + .guest-selection-form-container {
+    opacity: 1;
+}
+
+.guest-selection {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.guest-selection:last-child {
+    border-bottom: none;
+}
+
+.guest-selection-title {
+    margin: 25px;
+}
+
+.selection-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.selection-btn {
+    width: 35px;
+    height: 35px;
+    background-color: #ADC4CE;
+    border: 2px solid #96B6C5;
+    cursor: pointer;
+}
+
+.selection-btn:hover {
+    background-color: var(--base-color);
+}
+
+.selection-btn.fade {
+    background-color: hsl(198, 0%, 74%);
+    border: 2px solid hsl(199, 10%, 68%);
+}
+
+.selection-btn.fade:hover {
+    background-color: rgba(10, 10, 10, 0.1);
+}
+
+.selection-btn:last-child {
+    margin-right: 25px;
+}
+
+.selection-count {
+    margin: 10px;
 }
 
 .amenities-container {
@@ -943,6 +1046,11 @@ a.footer-link {
 
     .amenities-section {
         margin-top: 90px;
+    }
+
+    .bottom-booking-input {
+        height: 50%;
+        width: 75%;
     }
 }
 
