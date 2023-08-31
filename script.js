@@ -1,12 +1,14 @@
 const stickyItem = document.querySelector("[data-sticky]");
 const buttons = document.querySelectorAll("[data-button]");
 const selectionButtons = document.querySelectorAll("[data-selection-btn]");
+const hiddenForms = document.querySelectorAll("[data-hidden]");
 var topScreen = false;
 var width = screen.width;
 var height = screen.height;
 var selectionCounts = [1, 1, 0];
 
 addSubtractSelections();
+minMaxDate();
 
 // listening for clicks within the entire window to close containers that open from using .active class
 window.addEventListener("click", (e) => {
@@ -30,7 +32,12 @@ window.addEventListener("click", (e) => {
                 && button.getAttribute("data-button") === "guest-selection") {
                 return;
             } else {
-                button.classList.toggle("active");
+                if(button.classList.contains("active")) {
+                    button.classList.remove("active");
+                    setTimeout(function () {
+                        button.classList.add("inactive");
+                    }, 500)
+                } 
             }
         }
     })
@@ -39,7 +46,17 @@ window.addEventListener("click", (e) => {
 // listening for clicks within any button to add the .active class to the button
 buttons.forEach(button => {
     button.addEventListener("click", () => {
-        button.classList.toggle("active");
+        if(button.classList.contains("active")) {
+            button.classList.remove("active");
+            setTimeout(function () {
+                button.classList.add("inactive");
+            }, 500)
+        } else if(button.classList.contains("inactive")) {
+            button.classList.remove("inactive");
+            setTimeout(function () {
+                button.classList.add("active");
+            }, 100)
+        }
     })
 })
 
@@ -50,11 +67,15 @@ window.addEventListener("resize", () => {
     clearActiveClass();
 })
 
-
 function clearActiveClass() {
     let temp = document.querySelectorAll(".active");
     temp.forEach(item => {
-        item.classList.remove("active");
+        if(item.classList.contains("active")) {
+            item.classList.remove("active");
+            setTimeout(function () {
+                item.classList.add("inactive");
+            }, 500)
+        } 
     })
 }
 
@@ -62,7 +83,7 @@ function clearActiveClass() {
 const topOptions = {
     root: null,
     threshold: 1,
-    rootMargin: "-30px 0px 0px 0px"
+    rootMargin: "-84px 0px 0px 0px"
 };
 const topObserver = new IntersectionObserver(entries => {
     const temp = document.querySelector(".languages-dropdown-container");
@@ -91,6 +112,29 @@ const topObserver = new IntersectionObserver(entries => {
 topObserver.observe(stickyItem);
 
 // functions used to determine counts for the children and other buttons
+
+function minMaxDate() {
+    const date = new Date();
+    const bookingDates = document.querySelectorAll("[data-check]");
+    let minDate = [date.getFullYear(), String(date.getMonth() + 1).padStart(2, "0"), String(date.getDate()).padStart(2, "0")];
+    date.setDate(date.getDate() + 31);
+    let maxDate = [date.getFullYear(), String(date.getMonth() + 1).padStart(2, "0"), String(date.getDate()).padStart(2, "0")];
+
+    minDate = minDate[0] + "-" + minDate[1] + "-" + minDate[2];
+    maxDate = maxDate[0] + "-" + maxDate[1] + "-" + maxDate[2];
+    bookingDates.forEach(bookingDate => {
+        if(bookingDate.getAttribute("data-check") === "check-in") {
+            bookingDate.min = minDate;
+            bookingDate.max = maxDate;
+        }
+
+
+        if(bookingDate.getAttribute("data-check") === "checkout") {
+            bookingDate.min = minDate;
+            bookingDate.max = maxDate;
+        }
+    })
+}
 
 function addSubtractSelections() {
     let roomCount = document.querySelector("[data-room]");
@@ -159,7 +203,6 @@ function addSubtractSelections() {
                 }
             })
             let temp = document.querySelector("[data-button='guest-selection']");
-            
             let tempString;
 
             if(roomCount.innerHTML > 1)
@@ -175,7 +218,11 @@ function addSubtractSelections() {
                 tempString += ", " + (parseInt(adultCount.innerHTML) + parseInt(childCount.innerHTML)) + " Guests";
             temp.innerHTML = tempString;
 
-            
+            for(let i = 0; i < hiddenForms.length; i++)
+            {
+                if(hiddenForms) 
+                    hiddenForms[i].value = selectionCounts[i];
+            }
         })
     })
 }

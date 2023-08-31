@@ -21,10 +21,6 @@ body {
     overflow-x: hidden;
 }
 
-/* body:has(.active) {
-    overflow: hidden;
-} */
-
 h1,
 h2,
 h3,
@@ -172,7 +168,7 @@ button.nav-item {
     transition: transform 400ms ease-in-out;
     box-shadow: 0 6px 8px 1px rgba(0, 0, 0, 0.25);
     -ms-overflow-style: none; /* IE 10+ */
-    scrollbar-width: 4px;
+    scrollbar-width: thin;
 }
 
 .languages-dropdown-container::-webkit-scrollbar {
@@ -200,18 +196,27 @@ button.nav-item {
 
 .language-links a:hover {
     background-color: hsla(53, 24%, 88%);
-}   
+}
+
+.language-links a:focus-visible {
+    outline: 3px solid rgba(0, 0, 0, 0.2);
+}
 
 .nav-item.active {
     background-color: var(--nav-bar-hover);
 }
 
-:has(.nav-item.active) + .languages-dropdown-container{
+.nav-item.active + .languages-dropdown-container{
     transform: none;
+}
+
+.nav-item.inactive + .languages-dropdown-container{
+    display: none;
 }
 
 .nav-bar-mobile-icon svg {
     width: calc(var(--nav-bar-height) - 30px);
+    fill: #96B6C5;
 }
 
 .nav-bar-mobile-icon {
@@ -222,10 +227,28 @@ button.nav-item {
     border-radius: 100vw;
 }
 
-.nav-bar-mobile-icon:hover,
-.nav-bar-mobile-icon:hover .button-content ~ svg {
+.nav-bar-mobile-icon:hover {
     background-color: rgba(0, 0, 0, 0.25);
-    color:rgba(255, 255, 255, 0.8)
+}
+
+.nav-bar-mobile-icon:focus-visible {
+    outline: 3px solid rgba(0, 0, 0, 0.2);
+}
+
+.nav-bar-mobile-icon:hover:focus-visible {
+    outline: 3px solid #ADC4CE;
+}
+
+.nav-bar-mobile-icon:hover svg {
+    fill: var(--base-color);
+}
+
+.nav-bar-mobile-icon.active svg {
+    fill: black;
+}
+
+.nav-bar-mobile-icon.active:hover svg {
+    fill: var(--base-color);
 }
 
 button.nav-item::after {
@@ -264,6 +287,10 @@ button.nav-item.active::after {
     transform: none;
 }
 
+.mobile-content.inactive + .mobile-content-nav-container {
+    display: none;
+}
+
 .mobile-content-links {
     display: flex;
     flex-direction: column;
@@ -287,7 +314,7 @@ button.nav-item.active::after {
     font-size: 1.5rem;
     color: var(--text-color);
     width: 100%;
-    height: 100%;
+
     text-align: center;
 }
 
@@ -296,12 +323,23 @@ button.nav-item.active::after {
 }
 
 .mobile-content-links a {
+    height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.mobile-content-item {
+.mobile-content-links a:focus-visible,
+.mobile-content-button:focus-visible {
+    outline: 3px solid #ADC4CE;
+}
+
+.mobile-content-item:last-child {
+    border-top: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.mobile-content-item,
+.mobile-content-button {
     height: 50px;
     width: 100%;
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
@@ -329,7 +367,7 @@ button.mobile-content-button.active::after {
     transition: max-height 300ms ease-in-out, overflow 300ms ease-in-out;
     box-shadow: inset 0 0 5px 1px rgba(0, 0, 0, 0.20);
     -ms-overflow-style: none; /* IE 10+ */
-    scrollbar-width: 4px;
+    scrollbar-width: thin;
     height: 100%;
 }
 
@@ -347,13 +385,21 @@ button.mobile-content-button.active::after {
     border-radius: 100vw;
 }
 
-.mobile-content-links:has(.mobile-content-button.active) .mobile-languages-container {
+.mobile-content-button.active + .mobile-languages-container {
     max-height: 125px;
     overflow-y: scroll;
 }
 
+.mobile-content-button.inactive + .mobile-languages-container {
+    display: none;
+}
+
 .language-link.mobile:hover {
     background-color: hsla(53, 1%, 95%);;
+}
+
+.language-link.mobile:focus-visible {
+    outline: 3x solid rgba(0, 0, 0, 0.2)
 }
 
 .main-content {
@@ -461,7 +507,6 @@ a.primary-button:focus-visible {
 
 .booking-information.top-screen {
     z-index: 2;
-    box-shadow: 0px 1px 0px 1px rgba(0, 0, 0, 0.25);
 }
 
 .booking-input-form {
@@ -483,7 +528,7 @@ a.primary-button:focus-visible {
 .search-input {
     display: flex;
     align-items: center;
-    border: 1px solid;
+    border: 1px solid var(--text-color);
     width: 50%;
 }
 
@@ -517,7 +562,7 @@ a.primary-button:focus-visible {
     width: 40px;
     height: 90%;
     position: relative;
-    border-right: 1px solid;
+    border-right: 1px solid var(--text-color);
 }
 
 .search-input:focus-within {
@@ -527,13 +572,14 @@ a.primary-button:focus-visible {
 .check-in-out-dates {
     display: flex;
     align-items: flex-end;
-    border: 1px solid;
+    border: 1px solid var(--text-color);
     position: relative;
+    width: 50%;
 }
 
 .check-in-out-dates::after {
     content: "";
-    width: 2px;
+    width: 1px;
     height: 100%;
     background-color: var(--text-color);
     position: absolute;
@@ -552,24 +598,29 @@ a.primary-button:focus-visible {
     padding: 0 5px;
     position: relative;
     overflow: visible;
+    color: var(--text-color);
+    font-size: 0.75rem;
 }
 
 .check-in-out-dates input:focus-visible {
     outline: none;
 }
 
-.check-in-out-dates input::before {
+.check-in-out-dates div::before {
     position: absolute;
-    top: 0;
-    translate: 0 -110%;
+    top: 5px;
     font-weight: bold;
+    padding-left: 5px;
+    color: var(--text-color);
+    font-size: 0.80rem;
 }
 
-.check-in-out-dates input:first-child::before {
-    content: "Check in Date:"
+
+.check-in-out-dates div:first-child::before {
+    content: "Check-in Date:";
 }
 
-.check-in-out-dates input:last-child::before {
+.check-in-out-dates div:last-child::before {
     content: "Checkout Date:";
 }
 
@@ -594,11 +645,17 @@ a.primary-button:focus-visible {
 
 .search-btn {
     width: 25%;
+    font-size: 1rem;
+    font-weight: bold;
+    color: var(--text-color);
 }
 
 .booking-btn.contained {
     width: 100%;
     height: 100%;
+    font-size: 1rem;
+    font-weight: bold;
+    color: var(--text-color);
 }
 
 .booking-btn.contained::after {
@@ -606,6 +663,7 @@ a.primary-button:focus-visible {
     padding-left: 3px;
     content: "\25bc";
     font-size: 0.8rem;
+    color: var(--text-color);
 }
 
 .booking-btn.contained.active::after {
@@ -622,8 +680,7 @@ a.primary-button:focus-visible {
     outline: 3px solid #ADC4CE;
 }
 
-.booking-btn:first-child,
-.booking-btn:nth-child(2) {
+.booking-btn.contained {
     border-right: 1px solid var(--text-color);
 }
 
@@ -666,6 +723,10 @@ a.primary-button:focus-visible {
     opacity: 1;
 }
 
+.booking-btn.contained.inactive + .guest-selection-form-container {
+    display: none;
+}
+
 .guest-selection {
     display: flex;
     justify-content: space-between;
@@ -687,11 +748,16 @@ a.primary-button:focus-visible {
     border: 3px solid #96B6C5;
     font-size: 1.5rem;
     color: var(--base-color);
+    border-radius: 10px;
 }
 
 .selection-btn:hover {
     background-color: var(--base-color);
     color: var(--text-color);
+}
+
+.selection-btn:focus-visible {
+    outline: 3px solid rgba(0, 0, 0, 0.4);
 }
 
 .selection-btn.fade {
@@ -811,6 +877,11 @@ a.primary-button:focus-visible {
     background-size: cover;
     width: 25px;
     height: 25px;
+    /* cursor: pointer; */
+}
+
+.testimony-star:hover {
+    transform: scale(150%);
 }
 
 .testimony-1 {
@@ -915,9 +986,14 @@ a.primary-button:focus-visible {
     letter-spacing: 2px;
 }
 
+
 a.footer-link {
     text-decoration: none;
     color: inherit;
+}
+
+.footer-link:focus-visible {
+    outline: 2px solid #ADC4CE;
 }
 
 .copyright-footer {
@@ -946,6 +1022,10 @@ a.footer-link {
     display: none;
 }
 
+.closed {
+    display: none;
+}
+
 /* Media Queries */
 
 @media (orientation: portrait) and (max-width: 768px) {
@@ -966,6 +1046,10 @@ a.footer-link {
     .booking-information {
         height: auto;
         top: 166px;
+    }
+
+    .booking-information.top-screen {
+        box-shadow: 0px 1px 0px 1px rgba(0, 0, 0, 0.25);
     }
 
     .top-booking-input,
@@ -1043,12 +1127,6 @@ a.footer-link {
 
 }
 
-@media (max-width: 930px) {
-    .amenities-section {
-        margin-top: 90px;
-    }
-}
-
 @media (max-width: 768px) {
     .amenity-image {
         height: 40vh;
@@ -1072,9 +1150,6 @@ a.footer-link {
     .amenities-container {
         padding: 40px 0;
     }
-    .booking-information {
-        display: none;
-    }
     .amenities-section {   
         margin-top: 0;
     }
@@ -1085,6 +1160,9 @@ a.footer-link {
 }
 
 @media (max-width: 600px) {
+    .booking-information {
+        display: none;
+    }
     .nav-links.footer {
         display: none;
     }
