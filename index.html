@@ -101,59 +101,61 @@
         </div>
     </div>
     <article class="booking-information main-content" data-sticky>
-        <div class="booking-input-container">
-            <form class="booking-input-form" action="#">
+        <form class="booking-input-form" action="#">
+            <div class="booking-input-container">
                 <div class="top-booking-input">
                     <div class="search-input">
                         <input type="text" name="search" id="search" placeholder="Enter Destination">
                     </div>
                     <div class="check-in-out-dates">
-                        <input type="date" name="check-in" id="check-in">
-                        <input type="date" name="check-out" id="check-in">
+                        <div class="check-in-wrapper">
+                            <input type="date" name="check-in" id="check-in">
+                        </div>
+                        <div class="checkout-wrapper">
+                            <input type="date" name="checkout" id="checkout">
+                        </div>
                     </div>
                 </div>
 
                 <div class="bottom-booking-input">
-                    <div class="booking-input-search-btns">
-                        <div class="guest-selection-container">
-                            <button class="booking-btn contained" type="button" data-button="guest-selection">1 Room, 2 Guests</button>
-                            <div class="guest-selection-form-container">
-                                <div class="guest-selection room-count-container">
-                                    <h3 class="guest-selection-title rooms-title">Rooms</h3>
-                                    <div class="selection-wrapper">
-                                        <button class="selection-btn minus fade" type="button" data-selection-btn="room">-</button>
-                                        <div class="room-count selection-count" data-room>1</div>
-                                        <button class="selection-btn add" type="button" data-selection-btn="room">+</button>
-                                    </div>
+                    <div class="guest-selection-container">
+                        <button class="booking-btn contained" type="button" data-button="guest-selection">1 Room, 1 Guest</button>
+                        <div class="guest-selection-form-container">
+                            <div class="guest-selection room-count-container">
+                                <h3 class="guest-selection-title rooms-title">Rooms</h3>
+                                <div class="selection-wrapper">
+                                    <button class="selection-btn minus fade" type="button" data-selection-btn="room">-</button>
+                                    <div class="room-count selection-count" data-room>1</div>
+                                    <button class="selection-btn add" type="button" data-selection-btn="room">+</button>
                                 </div>
+                            </div>
 
-                                <div class="guest-selection adult-count-container">
-                                    <h3 class="guest-selection-title adult-title">Adults</h3>
-                                    <div class="selection-wrapper">
-                                        <button class="selection-btn minus fade" type="button" data-selection-btn="adult">-</button>
-                                        <div class="adult-count selection-count" data-adult>1</div>
-                                        <button class="selection-btn add" type="button" data-selection-btn="adult">+</button>
-                                    </div>
+                            <div class="guest-selection adult-count-container">
+                                <h3 class="guest-selection-title adult-title">Adults</h3>
+                                <div class="selection-wrapper">
+                                    <button class="selection-btn minus fade" type="button" data-selection-btn="adult">-</button>
+                                    <div class="adult-count selection-count" data-adult>1</div>
+                                    <button class="selection-btn add" type="button" data-selection-btn="adult">+</button>
                                 </div>
+                            </div>
 
-                                <div class="guest-selection adult-count-container">
-                                    <h3 class="guest-selection-title kid-title">Kids</h3>
-                                    <div class="selection-wrapper">
-                                        <button class="selection-btn minus fade" type="button" data-selection-btn="child">-</button>
-                                        <div class="children-count selection-count" data-child>1</div>
-                                        <button class="selection-btn add" type="button" data-selection-btn="child">+</button>
-                                    </div>
+                            <div class="guest-selection adult-count-container">
+                                <h3 class="guest-selection-title kid-title">Kids</h3>
+                                <div class="selection-wrapper">
+                                    <button class="selection-btn minus fade" type="button" data-selection-btn="child">-</button>
+                                    <div class="children-count selection-count" data-child>0</div>
+                                    <button class="selection-btn add" type="button" data-selection-btn="child">+</button>
                                 </div>
                             </div>
                         </div>
-                        <div class="special-rates-selection-container">
-                            <button class="booking-btn contained" type="button" data-button="special-rates">Special Rates</button>
-                        </div>
-                        <button class="booking-btn" type="submit">SEARCH</button>
                     </div>
+                    <div class="special-rates-selection-container">
+                        <button class="booking-btn contained" type="button" data-button="special-rates">Special Rates</button>
+                    </div>
+                    <button class="search-btn booking-btn" type="submit">SEARCH</button>
                 </div>
-            </form>
-        </div>
+            </div>
+        </form>
     </article>
     <main class="main-content">
         <section class="amenities-section">

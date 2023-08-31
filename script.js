@@ -4,7 +4,7 @@ const selectionButtons = document.querySelectorAll("[data-selection-btn]");
 var topScreen = false;
 var width = screen.width;
 var height = screen.height;
-var selectionCounts = [1, 1, 1];
+var selectionCounts = [1, 1, 0];
 
 addSubtractSelections();
 
@@ -96,7 +96,7 @@ function addSubtractSelections() {
     let roomCount = document.querySelector("[data-room]");
     let adultCount = document.querySelector("[data-adult]");
     let childCount = document.querySelector("[data-child]");
-    selectionButtons.forEach(button => {
+    selectionButtons.forEach(function callback(button, i) {
         button.addEventListener("click", () => {
             if(button.getAttribute("data-selection-btn") === "room") {
                 if(button.classList.contains("add") && selectionCounts[0] < 9) {
@@ -104,20 +104,78 @@ function addSubtractSelections() {
                 } else if(button.classList.contains("minus") && selectionCounts[0] > 1) {
                     roomCount.innerHTML = --selectionCounts[0];
                 }
-
-                if(selectionCounts[0] === 9 || selectionCounts[0] === 1) {
-                    button.classList.add("fade");
-                } else {
-                    button.classList.remove("fade");
-                }
             } else if(button.getAttribute("data-selection-btn") === "adult") {
-                console.log("Clicking Adult");
+                if(button.classList.contains("add") && selectionCounts[1] < 4) {
+                    adultCount.innerHTML = ++selectionCounts[1];
+                } else if(button.classList.contains("minus") && selectionCounts[1] > 1) {
+                    adultCount.innerHTML = --selectionCounts[1];
+                }
             } else if(button.getAttribute("data-selection-btn") === "child") {
-                console.log("Clicking Child");
+                if(button.classList.contains("add") && selectionCounts[2] < 8) {
+                    childCount.innerHTML = ++selectionCounts[2];
+                } else if(button.classList.contains("minus") && selectionCounts[2] > 0) {
+                    childCount.innerHTML = --selectionCounts[2];
+                }
             } else {
                 return -1;
             }
+
+            selectionCounts.forEach(function callback(count, j) {
+                if((count === 9 || (count === 1 && j != 2))) {
+                    let temp;
+                    if(count === 1) {
+                        if(j === 0) {
+                            temp = j;
+                        } else if(j === 1) {
+                            temp = j + 1;
+                        } else if(j === 2) {
+                            temp = j + 2;
+                        }
+                    } else if(count === 9) {
+                        if(j === 0) {
+                            temp = j + 1;
+                        } else if(j === 1) {
+                            temp = j + 2;
+                        } else if(j === 2) {
+                            temp = j + 3;
+                        }
+                    }
+                    
+                    if(temp >= 0 && !selectionButtons[temp].classList.contains("fade")) {
+                        selectionButtons[temp].classList.add("fade");
+                    }
+                } else if(count === 0 && j === 2) {
+                    selectionButtons[j + 2].classList.add("fade");
+                } else if(count === 4 && j === 1) {
+                    selectionButtons[j + 2].classList.add("fade");
+                } else if(count === 8 && j === 2) {
+                    selectionButtons[j + 3].classList.add("fade");
+                } else {
+                    if(button.classList.contains("add")) {
+                        selectionButtons[i - 1].classList.remove("fade");
+                    } else if(button.classList.contains("minus")) {
+                        selectionButtons[i + 1].classList.remove("fade");
+                    }
+                }
+            })
+            let temp = document.querySelector("[data-button='guest-selection']");
+            
+            let tempString;
+
+            if(roomCount.innerHTML > 1)
+            {
+                tempString = roomCount.innerHTML + " Rooms";
+            } else {
+                tempString = roomCount.innerHTML + " Room";
+            }
+
+            if((parseInt(adultCount.innerHTML) + parseInt(childCount.innerHTML)) === 1)
+                tempString += ", " + (parseInt(adultCount.innerHTML) + parseInt(childCount.innerHTML)) + " Guest";
+            else 
+                tempString += ", " + (parseInt(adultCount.innerHTML) + parseInt(childCount.innerHTML)) + " Guests";
+            temp.innerHTML = tempString;
+
+            
         })
     })
-
 }
