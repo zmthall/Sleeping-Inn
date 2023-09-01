@@ -8,6 +8,7 @@ var height = screen.height;
 var selectionCounts = [1, 1, 0];
 
 addSubtractSelections();
+specialRatesSelection();
 minMaxDate();
 
 // listening for clicks within the entire window to close containers that open from using .active class
@@ -16,6 +17,7 @@ window.addEventListener("click", (e) => {
     const mobileLanguage = document.querySelector(".mobile-languages-container"); 
     const mobileNav = document.querySelector(".mobile-content-nav-container");
     const guestSelection = document.querySelector(".guest-selection-form-container");
+    const specialRates = document.querySelector(".special-rates-form-container")
 
     buttons.forEach(button => {
         if(button != e.target && button.classList.contains("active")) {
@@ -30,6 +32,9 @@ window.addEventListener("click", (e) => {
                 return;
             } else if(guestSelection.contains(e.target)
                 && button.getAttribute("data-button") === "guest-selection") {
+                return;
+            } else if(specialRates.contains(e.target)
+                && button.getAttribute("data-button") === "special-rates") {
                 return;
             } else {
                 if(button.classList.contains("active")) {
@@ -222,6 +227,53 @@ function addSubtractSelections() {
             {
                 if(hiddenForms) 
                     hiddenForms[i].value = selectionCounts[i];
+            }
+        })
+    })
+}
+
+// function used to see if checkboxes have been changed
+
+function specialRatesSelection() {
+    const radioButtons = document.querySelectorAll("[data-rate]");
+    const collapsibles = document.querySelectorAll("[data-collapse]");
+    console.log(collapsibles);
+    radioButtons.forEach(radio => {
+        radio.addEventListener("change", () => {
+            if(radio.getAttribute("data-rate") === "none") {
+                if(collapsibles[0].classList.contains("active")) {
+                    collapsibles[0].classList.remove("active");
+                    setTimeout(function () {
+                        collapsibles[0].classList.add("inactive")
+                    }, 500);
+                } else if(collapsibles[1].classList.contains("active")) {
+                    collapsibles[1].classList.remove("active");
+                    setTimeout(function () {
+                        collapsibles[1].classList.add("inactive")
+                    }, 500);
+                }
+            } else if(radio.getAttribute("data-rate") === "coupon") {
+                radio.classList.remove("inactive");
+                setTimeout(function () {
+                    radio.classList.add("active");
+                }, 100);
+                if(collapsibles[1].classList.contains("active")) {
+                    collapsibles[1].classList.remove("active");
+                    setTimeout(function () {
+                        collapsibles[1].classList.add("inactive")
+                    }, 500);
+                }
+            } else if(radio.getAttribute("data-rate") === "group") {
+                radio.classList.remove("inactive");
+                setTimeout(function () {
+                    radio.classList.add("active");
+                }, 100);
+                if(collapsibles[0].classList.contains("active")){
+                    collapsibles[0].classList.remove("active");
+                    setTimeout(function () {
+                        collapsibles[0].classList.add("inactive")
+                    }, 500);
+                }
             }
         })
     })
